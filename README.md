@@ -1,57 +1,91 @@
-## Obsidian Sample Plugin
+## Obsidian Pikt
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+A plugin to parse [Pikchr] codeblocks.
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+## Changelog
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Changes the default font color to red using `styles.css`.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+- **0.1.0**:
+  - Add plugin with pikt render logic.
 
-### First time developing plugins?
 
-Quick starting guide for new plugin devs:
+## Configuration
 
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+This plugin will insert the generated SVG into the DOM with a class `pikt`. By
+design [Pikchr] expects colours to be defined as part of the script and
+similarly does this plugin.
 
-### Releasing new releases
+By default this plugin inverts colours when the Obsidian theme is dark. You can
+counter that by:
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments.
-- Publish the release.
+```css
+.theme-dark svg.pikt {
+  filter: invert(0%);
+}
+```
 
-### Adding your plugin to the community plugin list
+## Usage
 
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+This plugin will attempt to render any codeblock with the language set to
+`pikt`, For example:
 
-### How to use
+    ```pikt
+    box "A simple Pikchr box"
+    ```
 
-- Clone this repo.
-- `npm i` or `yarn` to install dependencies
-- `npm run dev` to start compilation in watch mode.
+If you are not familiar with the Pikchr script, the [Pikchr] website is the
+best place to get started. The [Tutorial Analysis Of A Pikchr Diagram] is
+particularly nice.
 
-### Manually installing the plugin
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+By default, Pikchr takes as much space as possible for the diagram, sometimes
+though, the result is too big. If this is the case, I recommend using a `scale
+= 1.2` for better sized diagrams. For example:
 
-### API Documentation
+```pikchr
+scale = 1.2
 
-See https://github.com/obsidianmd/obsidian-api
+box "Pikt"
+```
+
+
+## Installation
+
+From Obsidian:
+
+- Ensure Community Plugins are enabled.
+- Browse community plugins searching for **pikt**.
+- Click install.
+- Enable the plugin in the “Community Plugins” Settings section.
+- Open a file (notice that previously opened files won't get the effects of the plugin until reopened or changed).
+
+From release:
+
+- Download the `obsidian-pikt-{version}.zip` file from the chosen release, for example the [latest release].
+- Ensure “Community Plugins” are enabled in Settings.
+- Ensure the `.obsidian/plugins/` directory exists in your vault directory.
+- Expand the zip file into the `.obsidian/plugins/` directory such that an `obsidian-pikt` directory is a direct child of `plugins`.
+- Enable the plugin in the “Community Plugins” Settings section.
+- Open a file (notice that previously opened files won't get the effects of the plugin until reopened or changed).
+
+From source:
+
+- Clone the [source repository].
+- Run `npm install`.
+- Run `npm run build`.
+- Create a `obsidian-pikt` under your vault's `.obsidian/plugins/` directory.
+- Copy over `main.js`, `styles.css`, `versions.json` and `manifest.json`.
+- Enable the plugin in the “Community Plugins” Settings section.
+- Open a file (notice that previously opened files won't get the effects of the plugin until reopened or changed).
+
+
+## Licence
+
+Arnau Siches under the [MIT License](./LICENCE)
+
+
+
+[Pikchr]: https://pikchr.org/
+[Tutorial Analysis Of A Pikchr Diagram]: https://pikchr.org/home/doc/trunk/doc/teardown01.md
+[latest release]: https://github.com/arnau/obsidian-pikt/releases/latest
+[source repository]: https://github.com/arnau/obsidian-pikt
