@@ -14,12 +14,7 @@ async function piktHandler(source: string, el: HTMLElement, ctx: MarkdownPostPro
 
 export default class PiktPlugin extends Plugin {
   async onload() {
-    console.log('pikt: loading');
-
     this.registerMarkdownCodeBlockProcessor('pikt', piktHandler);
-  }
-
-  onunload() {
-    console.log('pikt: unloading');
+    this.registerMarkdownCodeBlockProcessor('pikchr', piktHandler);
   }
 }

@@ -5,6 +5,8 @@ A plugin to parse [Pikchr] codeblocks.
 
 ## Changelog
 
+- **0.2.0**:
+  - Handle `pikchr` codeblocks to align closer with Pikchr expectations.
 - **0.1.0**:
   - Add plugin with pikt render logic.
 
