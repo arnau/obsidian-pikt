@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-pikt",
 	"name": "Pikt",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"minAppVersion": "0.9.12",
 	"description": "A plugin to render Pikchr codeblocks.",
 	"author": "Arnau Siches",
